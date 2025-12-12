@@ -159,9 +159,9 @@ dependencies {
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
     // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 
-    implementation fg.deobf("localmods:prototypepain:2.6.6")
-    implementation fg.deobf("localmods:sirenhead:1.1.4")
-
+    implementation fg.deobf("localmods:prototype_pain:2.6.6")
+    implementation fg.deobf("localmods:siren_head:1.1.4")
+    implementation fg.deobf("localmods:create:6.0.8")
 
     //implementation fg.deobf("curse.maven:sirenheadthearrival-1013669:5571439")
 

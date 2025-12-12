@@ -73,5 +73,12 @@ side = "BOTH"
 modId = "siren_head"
 mandatory = false
 versionRange = "[1.1.4]"
-ordering = "BEFORE"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies."${mod_id}"]]
+modId = "create"
+mandatory = false
+versionRange = "[6.0.8]"
+ordering = "AFTER"
 side = "BOTH"

@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "prototypepaincompats.refmap.json",
   "mixins": [
+    "sirin.SirenSonicboomTickMixin"
   ],
   "client": [
   ],
@@ -13,5 +14,6 @@
   },
   "overwrites": {
     "requireAnnotations": true
-  }
+  },
+  "plugin": "net.kagaries.prototypepaincompats.mixin.MixinPlugin"
 }

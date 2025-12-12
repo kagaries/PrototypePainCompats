@@ -1,8 +1,10 @@
 package net.kagaries.prototypepaincompats.events;
 
+import com.mojang.logging.LogUtils;
 import net.adinvas.prototype_pain.PlayerHealthProvider;
 import net.adinvas.prototype_pain.limbs.Limb;
 import net.meme.sirenhead.init.SirenHeadModEntities;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -21,7 +23,7 @@ public class SirinHeadEvents {
 
 
                             if (limb != Limb.HEAD && limb != Limb.CHEST) {
-                                h.handleAmputation(limb, event.getAmount(), 0f, player);
+                                h.handleAmputation(limb, event.getAmount() + 10.5f, 0f, player);
                             }
 
                             if (limb == Limb.HEAD) {
@@ -36,7 +38,7 @@ public class SirinHeadEvents {
                                 }
                             }
 
-                            h.handleRandomDamage(event.getAmount() + 2f, player);
+                            h.handleRandomDamage(event.getAmount() + 6f, player);
                         });
                     }
                 } else if (event.getSource().getEntity().getType().equals(SirenHeadModEntities.SIREN_HEAD.get())) {

@@ -1,6 +1,7 @@
 package net.kagaries.prototypepaincompats;
 
 import com.mojang.logging.LogUtils;
+import net.kagaries.prototypepaincompats.events.CreateEvents;
 import net.kagaries.prototypepaincompats.events.SirinHeadEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
@@ -34,7 +35,8 @@ import org.slf4j.Logger;
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Main.MODID)
 public class Main {
-    public boolean SirinHead = ModList.get().isLoaded("siren_head");
+    public static boolean SirinHeadLoaded = ModList.get().isLoaded("siren_head"); //sirin
+    public static boolean CreateLoaded = ModList.get().isLoaded("create");
 
     // Define mod id in a common place for everything to reference
     public static final String MODID = "prototypepaincompats";
@@ -42,10 +44,14 @@ public class Main {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public Main() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        if (SirinHeadLoaded) {
+            LOGGER.info("Enabling compatibility for Siren Head: The Arrival");
+            MinecraftForge.EVENT_BUS.register(SirinHeadEvents.class);
+        }
 
-        if (SirinHead) {
-            modEventBus.register(new SirinHeadEvents());
+        if (CreateLoaded) {
+            LOGGER.info("Enabling compatibility for Create");
+            MinecraftForge.EVENT_BUS.register(CreateEvents.class);
         }
     }
 }
