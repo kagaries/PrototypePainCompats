@@ -1,6 +1,7 @@
 package net.kagaries.prototypepaincompats;
 
 import com.mojang.logging.LogUtils;
+import net.kagaries.prototypepaincompats.custom.CustomPlayerHealthData;
 import net.kagaries.prototypepaincompats.events.CreateEvents;
 import net.kagaries.prototypepaincompats.events.SirinHeadEvents;
 import net.minecraftforge.common.MinecraftForge;
@@ -14,6 +15,7 @@ import org.slf4j.Logger;
 public class Main {
     public static boolean SirinHeadLoaded = ModList.get().isLoaded("siren_head"); //sirin
     public static boolean CreateLoaded = ModList.get().isLoaded("create");
+    public static CustomPlayerHealthData healthData = new CustomPlayerHealthData();
 
     // Define mod id in a common place for everything to reference
     public static final String MODID = "prototypepaincompats";
