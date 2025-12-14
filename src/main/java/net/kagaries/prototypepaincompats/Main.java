@@ -2,12 +2,16 @@ package net.kagaries.prototypepaincompats;
 
 import com.mojang.logging.LogUtils;
 import net.kagaries.prototypepaincompats.custom.CustomPlayerHealthData;
+import net.kagaries.prototypepaincompats.custom.moodles.CustomMoodles;
 import net.kagaries.prototypepaincompats.events.CreateEvents;
 import net.kagaries.prototypepaincompats.events.SirinHeadEvents;
+import net.kagaries.prototypepaincompats.network.ModNetwork;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -25,6 +29,8 @@ public class Main {
     public Main() {
         IEventBus eventBus = MinecraftForge.EVENT_BUS;
 
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
+
         if (SirinHeadLoaded) {
             LOGGER.info("Enabling compatibility for Siren Head: The Arrival");
             eventBus.register(SirinHeadEvents.class);
@@ -35,6 +41,12 @@ public class Main {
             eventBus.register(CreateEvents.class);
         }
 
+        CustomMoodles.init();
+
         //TODO: Add configs
+    }
+
+    private void commonSetup(FMLCommonSetupEvent event) {
+        event.enqueueWork(ModNetwork::register);
     }
 }

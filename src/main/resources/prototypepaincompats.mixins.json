@@ -5,10 +5,12 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "prototypepaincompats.refmap.json",
   "mixins": [
-    "PlayerHealthDataMixin",
+    "accessors.LimbStatisticsAccessor",
+    "accessors.PlayerHealthDataAccessor",
     "sirin.SirenSonicboomTickMixin"
   ],
   "client": [
+    "HealthScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
