@@ -1,5 +1,6 @@
 package net.kagaries.prototypepaincompats.mixin;
 
+import com.mojang.logging.LogUtils;
 import net.adinvas.prototype_pain.limbs.PlayerHealthData;
 import net.kagaries.prototypepaincompats.custom.CustomHealthProvider;
 import net.kagaries.prototypepaincompats.custom.CustomPlayerHealthData;
@@ -31,7 +32,7 @@ public class PlayerHealthDataMixin {
         Optional<CustomPlayerHealthData> data = player.getCapability(CustomHealthProvider.CUSTOM_HEALTH_DATA).resolve();
 
         if (data.isPresent() && data.get().panic > 0.0F) {
-            newBPM += (int)(data.get().panic * 0.4F);
+            newBPM += (int)(data.get().panic);
         }
 
         return newBPM;
