@@ -1,9 +1,13 @@
 package net.kagaries.prototypepaincompats.mixin;
 
 import com.mojang.logging.LogUtils;
+import net.adinvas.prototype_pain.limbs.Limb;
 import net.adinvas.prototype_pain.limbs.PlayerHealthData;
 import net.kagaries.prototypepaincompats.custom.CustomHealthProvider;
 import net.kagaries.prototypepaincompats.custom.CustomPlayerHealthData;
+import net.kagaries.prototypepaincompats.custom.thought.ThoughtMain;
+import net.kagaries.prototypepaincompats.custom.thought.ThoughtType;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;

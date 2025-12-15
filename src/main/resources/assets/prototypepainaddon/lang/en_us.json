@@ -1,9 +1,21 @@
 {
-  "prototype_pain_compats.gui.moodle.panic.title1": "Panic",
-  "prototype_pain_compats.gui.moodle.panic.description1": "You can't control your own breathing.",
-  "prototype_pain_compats.gui.moodle.panic.title3": "HORRIFIED",
-  "prototype_pain_compats.gui.moodle.panic.description3": "CAN'T FOCUS. CAN'T THINK. NOTHING ELSE MATTERS. RUN FOR YOUR LIFE OR FIGHT FOR IT!",
-  "prototype_pain_compats.gui.moodle.panic.title2": "Panic Attack",
-  "prototype_pain_compats.gui.moodle.panic.description2": "Your hands start to feel numb, and your focus is breaking."
+  "prototype_pain_compats.gui.moodle.panic.title1": "Scared",
+  "prototype_pain_compats.gui.moodle.panic.description1": "You feel on edge.",
+  "prototype_pain_compats.gui.moodle.panic.title4": "HORRIFIED",
+  "prototype_pain_compats.gui.moodle.panic.description4": "CAN'T FOCUS. CAN'T THINK. NOTHING ELSE MATTERS. RUN FOR YOUR LIFE OR FIGHT FOR IT!",
+  "prototype_pain_compats.gui.moodle.panic.title3": "Panic Attack",
+  "prototype_pain_compats.gui.moodle.panic.description3": "Your hands start to feel numb, your focus is breaking.",
+  "prototype_pain_compats.gui.moodle.panic.title2": "Hyperventilation",
+  "prototype_pain_compats.gui.moodle.panic.description2": "You can't control your breathing.",
+  "prototype_pain_compats.gui.moodle.wither_sickness.title1": "Purple Splotches",
+  "prototype_pain_compats.gui.moodle.wither_sickness.description1": "The affected area is spotted in purple. Treatment needed.",
+  "prototype_pain_compats.gui.moodle.wither_sickness.title2": "Wither Sickness",
+  "prototype_pain_compats.gui.moodle.wither_sickness.description2": "The affected areas are beginning to spread on the limb. Treatment needed.",
+  "prototype_pain_compats.gui.moodle.wither_sickness.description3": "Your skin is decaying away. Urgent treatment needed.",
+  "prototype_pain_compats.gui.moodle.wither_sickness.description4": "The muscle is now decaying as well. It has begun spreading to connected limbs. Urgent treatment needed.",
 
+  "prototype_pain_compats.thought.panic.light": "I don't know about this.",
+  "prototype_pain_compats.thought.panic.normal": "...",
+  "prototype_pain_compats.thought.panic.heavy": "I HAVE to get somewhere safe.",
+  "prototype_pain_compats.thought.panic.critical": "CAN'T FOCUS. CAN'T THINK."
 }

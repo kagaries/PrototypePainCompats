@@ -1,15 +1,17 @@
 package net.kagaries.prototypepaincompats.custom;
 
-import com.mojang.logging.LogUtils;
 import net.adinvas.prototype_pain.PlayerHealthProvider;
-import net.adinvas.prototype_pain.PrototypePain;
 import net.adinvas.prototype_pain.limbs.Limb;
 import net.adinvas.prototype_pain.limbs.LimbStatistics;
 import net.adinvas.prototype_pain.limbs.PlayerHealthData;
+import net.kagaries.prototypepaincompats.Main;
+import net.kagaries.prototypepaincompats.custom.thought.ThoughtMain;
+import net.kagaries.prototypepaincompats.custom.thought.ThoughtType;
 import net.kagaries.prototypepaincompats.mixin.accessors.LimbStatisticsAccessor;
 import net.kagaries.prototypepaincompats.mixin.accessors.PlayerHealthDataAccessor;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
@@ -20,6 +22,8 @@ import java.util.Map;
 public class CustomPlayerHealthData {
     private final EnumMap<Limb, CustomLimbStatistics> limbStats = new EnumMap<>(Limb.class);
 
+    private int tick = 0;
+
     public CustomPlayerHealthData() {
         for (Limb limb : Limb.values()) {
             limbStats.put(limb, new CustomLimbStatistics());
@@ -29,8 +33,8 @@ public class CustomPlayerHealthData {
     public boolean isReducedDirty = false;
 
     //SANITY
-    public float mood = 100.0F; //Custom internal sanity value to be applied across all mods that could benefit from it
-    public float panic = 0.0F;
+    public float mood = 100.0F;
+    public float panic = 0.0F; //Custom internal panic value to be applied across all mods that could benefit from it
 
     //MOD SPECIFIC
     //MEKANISM
@@ -46,7 +50,11 @@ public class CustomPlayerHealthData {
     }
 
     public String baseToString() {
-        return "CustomPlayerHealthData{panic=" + this.panic + "}";
+        return "CustomPlayerHealthData{panic=" + this.panic + ", mood=" + this.mood + "}";
+    }
+
+    public float getPanic() {
+        return this.panic;
     }
 
     public void setPanic(float value) {
@@ -63,8 +71,25 @@ public class CustomPlayerHealthData {
 
     public void tickUpdate(ServerPlayer player) {
         if (player.isAlive()) {
+            tick++;
             for(Limb limb : this.limbStats.keySet()) {
                 this.updateLimb(player, limb);
+            }
+
+            if (this.panic > 0.0F && tick == 1) {
+                float panicReductionAmount = (this.mood + 0.01F) / 45;
+                this.mood = Mth.clamp(this.mood - (panicReductionAmount / 3), 0.0F, 100.0F);
+                this.panic = Mth.clamp(this.panic - panicReductionAmount, 0.0F, 100.0F);
+            }
+
+            if (this.panic < 5.0F && tick == 1) {
+                if (this.mood < 100.0F) {
+                    this.mood = Mth.clamp(this.mood + 0.05F, 0.0F, 100.0F);
+                }
+            }
+
+            if (tick >= 20) {
+                tick = 0;
             }
         }
     }
@@ -86,6 +111,7 @@ public class CustomPlayerHealthData {
                     if (customLimbStatistics.wither_sickness > 75.0F) {
                         playerHealthData.applyMuscleDamage(limb, playerHealthData.getINFECTION_MUSCLE_DRAIN() * 1.5f, player);
                     }
+                    customPlayerHealthData.setPanic(customPlayerHealthData.getPanic() + (customLimbStatistics.wither_sickness / 100));
                 } else if (customLimbStatistics.wither_sickness > 0F) {
                     playerHealthData.setLimbSkinHeal(limb, false);
                     playerHealthData.setLimbMuscleHeal(limb, false);
@@ -188,6 +214,8 @@ public class CustomPlayerHealthData {
         this.craving = 0.0F;
         this.brainDecay = false;
 
+        ThoughtMain.sendThought(player, ThoughtType.Good, Component.literal("Ahhh, much better!"));
+
         player.getCapability(PlayerHealthProvider.PLAYER_HEALTH_DATA).ifPresent(playerHealthData -> {
             playerHealthData.recalcTotalPain();
             playerHealthData.recalculateConsciousness();
@@ -211,10 +239,9 @@ public class CustomPlayerHealthData {
 
         float wither_sickness = this.getLimbStats(limb).wither_sickness;
         if (wither_sickness > 0.0F) {
-            wither_sickness += wither_sickness_progress / 15.0F;
+            wither_sickness += wither_sickness_progress / 7.5F;
             wither_sickness = Mth.clamp(wither_sickness, 0.0F, 100.0F);
             this.limbStats.get(limb).wither_sickness = wither_sickness;
-            LogUtils.getLogger().info("WitherSickness: " + limb + " : " + wither_sickness);
             this.witherSicknessSpread(limb);
         }
 
@@ -231,7 +258,7 @@ public class CustomPlayerHealthData {
         if (stats == null) {
             stats = new CustomLimbStatistics();
             this.limbStats.put(limb, stats);
-            PrototypePain.LOGGER.warn("PlayerHealthData: missing LimbStatistics for {} — created default", limb);
+            Main.LOGGER.warn("CustomPlayerHealthData: missing CustomLimbStatistics for {} — created default", limb);
         }
 
         return stats;

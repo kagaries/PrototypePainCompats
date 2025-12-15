@@ -1,8 +1,12 @@
 package net.kagaries.prototypepaincompats.mixin.sirin;
 
 import net.adinvas.prototype_pain.PlayerHealthProvider;
+import net.kagaries.prototypepaincompats.custom.CustomHealthProvider;
+import net.kagaries.prototypepaincompats.custom.thought.ThoughtMain;
+import net.kagaries.prototypepaincompats.custom.thought.ThoughtType;
 import net.meme.sirenhead.entity.SirenHeadEntity;
 import net.meme.sirenhead.procedures.SonicboomWhileProjectileFlyingTickProcedure;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -36,6 +40,9 @@ public class SirenSonicboomTickMixin {
                         player.getCapability(PlayerHealthProvider.PLAYER_HEALTH_DATA).ifPresent(h -> {
                             h.setBrainHealth(h.getBrainHealth() - 10.5f);
                             h.setHearingLoss(h.getHearingLoss() + 0.25f);
+                            player.getCapability(CustomHealthProvider.CUSTOM_HEALTH_DATA).ifPresent(c -> {
+                                c.setPanic(c.getPanic() + 30.0f);
+                            });
                         });
 
                         player.hurt(player.level().damageSources().generic(), 0);

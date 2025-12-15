@@ -3,6 +3,7 @@ package net.kagaries.prototypepaincompats.custom.moodles;
 import net.adinvas.prototype_pain.client.moodles.AbstractMoodleVisual;
 import net.adinvas.prototype_pain.client.moodles.MoodleStatus;
 import net.kagaries.prototypepaincompats.custom.CustomHealthProvider;
+import net.kagaries.prototypepaincompats.custom.thought.ThoughtMain;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -13,24 +14,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class PanicMoodle extends AbstractMoodleVisual {
+public class PanicMoodle extends AbstractMoodleVisual implements TickableMoodle {
+    private MoodleStatus lastMoodleStatus = MoodleStatus.NONE;
+
     @Override
     public MoodleStatus calculateStatus(Player player) {
-        AtomicReference<MoodleStatus> status = new AtomicReference<>(this.getMoodleStatus());
-        player.getCapability(CustomHealthProvider.CUSTOM_HEALTH_DATA).ifPresent(customPlayerHealthData -> {
-            float panic = customPlayerHealthData.panic;
-            if (panic > 90.0F) {
-                status.set(MoodleStatus.CRITICAL);
-            } else if (panic > 50.0F) {
-                status.set(MoodleStatus.NORMAL);
-            } else if (panic > 10.0F) {
-                status.set(MoodleStatus.LIGHT);
-            } else {
-                status.set(MoodleStatus.NONE);
-            }
-        });
+        float panic = player.getCapability(CustomHealthProvider.CUSTOM_HEALTH_DATA)
+                .map(data -> data.panic)
+                .orElse(0.0F);
 
-        return status.get() != null ? status.get() : this.getMoodleStatus();
+        if (panic > 90.0F) return MoodleStatus.CRITICAL;
+        if (panic > 60.0F) return MoodleStatus.HEAVY;
+        if (panic > 30.0F) return MoodleStatus.NORMAL;
+        if (panic > 0.15F) return MoodleStatus.LIGHT;
+        return MoodleStatus.NONE;
+    }
+
+    public void tick(Player player) {
+        MoodleStatus newStatus = calculateStatus(player);
+
+        if (newStatus.ordinal() > lastMoodleStatus.ordinal()) {
+            ThoughtMain.sendMoodleThought(player, "panic", newStatus, lastMoodleStatus);
+        }
+
+        lastMoodleStatus = newStatus;
     }
 
     @Override
@@ -51,9 +58,13 @@ public class PanicMoodle extends AbstractMoodleVisual {
                 componentList.add(Component.translatable("prototype_pain_compats.gui.moodle.panic.title2").withStyle(ChatFormatting.YELLOW));
                 componentList.add(Component.translatable("prototype_pain_compats.gui.moodle.panic.description2").withStyle(ChatFormatting.GRAY));
                 break;
-            case CRITICAL:
-                componentList.add(Component.translatable("prototype_pain_compats.gui.moodle.panic.title3").withStyle(ChatFormatting.RED));
+            case HEAVY:
+                componentList.add(Component.translatable("prototype_pain_compats.gui.moodle.panic.title3").withStyle(ChatFormatting.YELLOW));
                 componentList.add(Component.translatable("prototype_pain_compats.gui.moodle.panic.description3").withStyle(ChatFormatting.GRAY));
+                break;
+            case CRITICAL:
+                componentList.add(Component.translatable("prototype_pain_compats.gui.moodle.panic.title4").withStyle(ChatFormatting.RED));
+                componentList.add(Component.translatable("prototype_pain_compats.gui.moodle.panic.description4").withStyle(ChatFormatting.GRAY));
         }
 
         return componentList;

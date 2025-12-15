@@ -17,6 +17,7 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @Mod.EventBusSubscriber(
@@ -99,6 +100,15 @@ public class ModCommands {
             });
             ((CommandSourceStack)ctx.getSource()).sendSuccess(() -> Component.literal("Applied value " + value + " to " + String.valueOf(limb) + " | " + finalRaw + " for " + target.getName().getString()), false);
             return 1;
-        })))))));
+        })))))).then(Commands.literal("heal").requires(source -> source.hasPermission(2)).then(Commands.argument("targets", EntityArgument.player()).executes(ctx -> {
+            Collection<ServerPlayer> targets = EntityArgument.getPlayers(ctx, "targets");
+
+            for(ServerPlayer player : targets) {
+                player.getCapability(CustomHealthProvider.CUSTOM_HEALTH_DATA).ifPresent(c -> c.resetToDefaults(player));
+            }
+
+            ((CommandSourceStack)ctx.getSource()).sendSuccess(() -> Component.literal("Healed " + targets.size() + " player(s)."), true);
+            return targets.size();
+        }))));
     }
 }
