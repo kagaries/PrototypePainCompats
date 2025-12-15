@@ -18,6 +18,7 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class CustomPlayerHealthData {
     private final EnumMap<Limb, CustomLimbStatistics> limbStats = new EnumMap<>(Limb.class);
@@ -120,6 +121,28 @@ public class CustomPlayerHealthData {
                 this.witherSicknessSpread(limb);
             }
         }));
+    }
+
+    public static Limb getRandomNoneAmputatedLimb(Player player) {
+        Limb limb = Limb.weigtedRandomLimb();
+        boolean isAmputated = false;
+
+        Optional<PlayerHealthData> data = player.getCapability(PlayerHealthProvider.PLAYER_HEALTH_DATA).resolve();
+
+        if (data.isPresent()) {
+            if (data.get().isAmputated(limb)) {
+                isAmputated = true;
+            }
+
+            while (isAmputated) {
+                limb = Limb.weigtedRandomLimb();
+                isAmputated = data.get().isAmputated(limb);
+            }
+
+            return limb;
+        } else {
+            return limb;
+        }
     }
 
     public CompoundTag serializeNBT(CompoundTag nbt) {
