@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.kagaries.prototypepaincompats.custom.CustomPlayerHealthData;
 import net.kagaries.prototypepaincompats.custom.moodles.CustomMoodles;
 import net.kagaries.prototypepaincompats.events.CreateEvents;
+import net.kagaries.prototypepaincompats.events.CuffedEvents;
 import net.kagaries.prototypepaincompats.events.SirinHeadEvents;
 import net.kagaries.prototypepaincompats.network.ModNetwork;
 import net.minecraftforge.common.MinecraftForge;
@@ -19,7 +20,7 @@ import org.slf4j.Logger;
 public class Main {
     public static boolean SirinHeadLoaded = ModList.get().isLoaded("siren_head"); //sirin
     public static boolean CreateLoaded = ModList.get().isLoaded("create");
-    public static CustomPlayerHealthData healthData = new CustomPlayerHealthData();
+    public static boolean CuffedLoaded = ModList.get().isLoaded("cuffed");
 
     // Define mod id in a common place for everything to reference
     public static final String MODID = "prototypepaincompats";
@@ -39,6 +40,11 @@ public class Main {
         if (CreateLoaded) {
             LOGGER.info("Enabling compatibility for Create");
             eventBus.register(CreateEvents.class);
+        }
+
+        if (CuffedLoaded) {
+            LOGGER.info("Enabling compatibility for Cuffed");
+            eventBus.register(CuffedEvents.class);
         }
 
         CustomMoodles.init();
