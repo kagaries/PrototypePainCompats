@@ -166,7 +166,7 @@ dependencies {
     implementation fg.deobf("localmods:cuffed:1.3.13")
     implementation fg.deobf("localmods:lazrs_lib:1.1.1")
 
-    implementation fg.deobf("localmods:curtain:1.3.2") //really only here to help me test things
+    //implementation fg.deobf("localmods:curtain:1.3.2") //really only here to help me test things
 
     //implementation fg.deobf("curse.maven:sirenheadthearrival-1013669:5571439")
 
