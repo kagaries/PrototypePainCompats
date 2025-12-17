@@ -22,24 +22,20 @@ public class MoodleControllerMixin {
     private static AbstractMoodleVisual getVisibleMoodles(AbstractMoodleVisual value, Player player) {
         if (value instanceof TickableMoodle) {
             ((TickableMoodle) value).tick(player);
-        } else {
-            String moodleName = value.getClass().getSimpleName();
-            MoodleStatus newStatus = value.calculateStatus(player);
-
-            if (moodleName.equals("TemperatureMoodle")) {
-                return value;
-            }
-
-            if (!prototypepaincompats$hashMap.containsKey(moodleName)) {
-                prototypepaincompats$hashMap.put(moodleName, MoodleStatus.NONE);
-            }
-
-            if (newStatus.ordinal() > prototypepaincompats$hashMap.get(moodleName).ordinal()) {
-                ThoughtMain.sendMoodleThought(player, moodleName, newStatus, prototypepaincompats$hashMap.get(moodleName));
-            }
-
-            prototypepaincompats$hashMap.replace(moodleName, newStatus);
-        }
+        } // else {
+//            String moodleName = value.getClass().getSimpleName();
+//            MoodleStatus newStatus = value.calculateStatus(player);
+//
+//            if (!prototypepaincompats$hashMap.containsKey(moodleName)) {
+//                prototypepaincompats$hashMap.put(moodleName, MoodleStatus.NONE);
+//            }
+//
+//            if (newStatus.ordinal() > prototypepaincompats$hashMap.get(moodleName).ordinal()) {
+//                ThoughtMain.sendMoodleThought(player, moodleName, newStatus, prototypepaincompats$hashMap.get(moodleName));
+//            }
+//
+//            prototypepaincompats$hashMap.replace(moodleName, newStatus);
+//        }
 
         return value;
     }
