@@ -238,11 +238,6 @@ public class CustomPlayerHealthData {
         this.brainDecay = false;
 
         ThoughtMain.sendThought(player, ThoughtType.Good, Component.literal("Ahhh, much better!"));
-
-        player.getCapability(PlayerHealthProvider.PLAYER_HEALTH_DATA).ifPresent(playerHealthData -> {
-            playerHealthData.recalcTotalPain();
-            playerHealthData.recalculateConsciousness();
-        });
     }
 
     public void witherSicknessSpread(Limb limb) {
