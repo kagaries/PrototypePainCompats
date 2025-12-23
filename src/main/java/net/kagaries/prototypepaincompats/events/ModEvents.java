@@ -60,22 +60,6 @@ public class ModEvents {
                 });
                 profiler.pop();
             }
-        } else {
-            player.getCapability(PlayerHealthProvider.PLAYER_HEALTH_DATA).ifPresent(playerHealthData -> {
-                player.getCapability(CustomHealthProvider.CUSTOM_HEALTH_DATA).ifPresent(customPlayerHealthData -> {
-                    if (player instanceof IAnchorableEntity iAnchorableEntity) {
-                        if (iAnchorableEntity.isAnchored()) {
-                            double minDist = (double)(Float) CuffedMod.SERVER_CONFIG.ANCHORING_MAX_CHAIN_LENGTH.get();
-                            double maxDist = (double)player.fallDistance > 0.2F ? (Float)CuffedMod.SERVER_CONFIG.ANCHORING_MAX_CHAIN_LENGTH.get() : (Float)CuffedMod.SERVER_CONFIG.ANCHORING_SUFFOCATION_LENGTH.get();
-                            if ((double)player.distanceTo(iAnchorableEntity.getAnchor()) > minDist) {
-                                if ((double)player.distanceTo(iAnchorableEntity.getAnchor()) > maxDist) {
-                                    playerHealthData.setBreathing(false);
-                                }
-                            }
-                        }
-                    }
-                });
-            });
         }
     }
 

@@ -18,9 +18,9 @@ import org.slf4j.Logger;
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Main.MODID)
 public class Main {
-    public static boolean SirinHeadLoaded = ModList.get().isLoaded("siren_head"); //sirin
-    public static boolean CreateLoaded = ModList.get().isLoaded("create");
-    public static boolean CuffedLoaded = ModList.get().isLoaded("cuffed");
+    public static boolean SirinHeadLoaded; //sirin
+    public static boolean CreateLoaded;
+    public static boolean CuffedLoaded;
 
     // Define mod id in a common place for everything to reference
     public static final String MODID = "prototypepaincompats";
@@ -29,6 +29,12 @@ public class Main {
 
     public Main() {
         IEventBus eventBus = MinecraftForge.EVENT_BUS;
+
+        ModList modList = ModList.get();
+
+        CuffedLoaded = modList.isLoaded("cuffed");
+        SirinHeadLoaded = modList.isLoaded("sirenhead");
+        CreateLoaded = modList.isLoaded("create");
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
 

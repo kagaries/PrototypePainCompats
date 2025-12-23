@@ -16,12 +16,16 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public String getRefMapperConfig() {
-        return "";
+        return null;
     }
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.startsWith("Siren")) {
+        if (mixinClassName.contains(".cuffed.")) {
+            return Main.CuffedLoaded;
+        }
+
+        if (mixinClassName.contains(".siren.")) {
             return Main.SirinHeadLoaded;
         }
 

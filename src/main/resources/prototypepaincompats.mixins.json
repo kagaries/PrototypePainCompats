@@ -3,7 +3,6 @@
   "minVersion": "0.8",
   "package": "net.kagaries.prototypepaincompats.mixin",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "prototypepaincompats.refmap.json",
   "mixins": [
     "MoodleControllerMixin",
     "PlayerHealthDataMixin",
@@ -12,7 +11,8 @@
     "sirin.SirenSonicboomTickMixin"
   ],
   "client": [
-    "HealthScreenMixin"
+    "HealthScreenMixin",
+    "cuffed.CuffedHealthScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

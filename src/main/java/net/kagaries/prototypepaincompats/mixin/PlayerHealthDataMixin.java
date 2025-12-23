@@ -28,7 +28,7 @@ public class PlayerHealthDataMixin {
         this.prototypePainCompats$player = player;
     }
 
-    @ModifyVariable(method = "calculateBPM", remap = false, at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(III)I"), index = 1)
+    @ModifyVariable(method = "calculateBPM", remap = false, at = @At(value = "INVOKE", target = "Lnet/adinvas/prototype_pain/limbs/PlayerHealthData;getNetOpiodids()F"), ordinal = 0)
     private int modifyBPMBeforeSet(int newBPM) {
         ServerPlayer player = this.prototypePainCompats$player;
         if (player == null) return newBPM;
