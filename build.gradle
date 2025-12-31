@@ -159,12 +159,12 @@ dependencies {
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
     // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 
-    implementation "localmods:prototype_pain:2.7.1"
-    implementation fg.deobf("localmods:siren_head:1.1.4")
-    implementation fg.deobf("localmods:create:6.0.8")
+    implementation "localmods:prototype_pain:2.7.2"
+    implementation "localmods:siren_head:1.1.4"
+    implementation "localmods:create:6.0.8"
 
-    implementation fg.deobf("localmods:cuffed:1.3.13")
-    implementation fg.deobf("localmods:lazrs_lib:1.1.1")
+    implementation "localmods:cuffed:1.3.13"
+    implementation "localmods:lazrs_lib:1.1.1"
 
     //implementation fg.deobf("localmods:curtain:1.3.2") //really only here to help me test things
 

@@ -1,6 +1,7 @@
 package net.kagaries.prototypepaincompats.mixin;
 
-import net.kagaries.prototypepaincompats.Main;
+import net.minecraftforge.fml.loading.FMLLoader;
+import net.minecraftforge.fml.loading.moddiscovery.ModInfo;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -22,11 +23,11 @@ public class MixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (mixinClassName.contains(".cuffed.")) {
-            return Main.CuffedLoaded;
+            return isModLoadedEarly("cuffed");
         }
 
         if (mixinClassName.contains(".siren.")) {
-            return Main.SirinHeadLoaded;
+            return isModLoadedEarly("sirenhead");
         }
 
         return true;
@@ -50,5 +51,13 @@ public class MixinPlugin implements IMixinConfigPlugin {
     @Override
     public void postApply(String s, ClassNode classNode, String s1, IMixinInfo iMixinInfo) {
 
+    }
+
+    private static boolean isModLoadedEarly(String modid) {
+        return FMLLoader.getLoadingModList()
+                .getMods()
+                .stream()
+                .map(ModInfo::getModId)
+                .anyMatch(modid::equals);
     }
 }
