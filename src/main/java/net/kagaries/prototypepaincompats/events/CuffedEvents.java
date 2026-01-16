@@ -8,9 +8,6 @@ import net.adinvas.prototype_pain.limbs.Limb;
 import net.kagaries.prototypepaincompats.custom.CustomHealthProvider;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -31,6 +28,7 @@ public class CuffedEvents {
                     h.setOxygen(h.getOxygen() - 10f);
                     if (player.getDeltaMovement().y > -2) {
                         h.setLimbFracture(Limb.HEAD, 100f);
+                        player.hurt(level.damageSources().inWall(), 0.0f);
                     }
                 });
                 event.setCanceled(true);
