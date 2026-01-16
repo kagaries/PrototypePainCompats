@@ -28,6 +28,10 @@ This is a mod to add compatibility to mods that otherwise would be weird/nonfunc
 
 </details>
 
+## Suggesting a Mod
+
+If you want support for a specfic mod, create an issue with the mod and how it would function (do note that changes may or may not be made to how it would function) 
+
 ## Credits
 
 - [AdInVas](https://github.com/AdInVas): Creator/Developer of Prototype: Pain
