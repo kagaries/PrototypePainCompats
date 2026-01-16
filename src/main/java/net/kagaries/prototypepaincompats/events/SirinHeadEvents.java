@@ -1,10 +1,8 @@
 package net.kagaries.prototypepaincompats.events;
 
-import com.mojang.logging.LogUtils;
 import net.adinvas.prototype_pain.PlayerHealthProvider;
 import net.adinvas.prototype_pain.limbs.Limb;
 import net.meme.sirenhead.init.SirenHeadModEntities;
-import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;

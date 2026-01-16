@@ -2,12 +2,8 @@ package net.kagaries.prototypepaincompats.mixin.sirin;
 
 import net.adinvas.prototype_pain.PlayerHealthProvider;
 import net.kagaries.prototypepaincompats.custom.CustomHealthProvider;
-import net.kagaries.prototypepaincompats.custom.thought.ThoughtMain;
-import net.kagaries.prototypepaincompats.custom.thought.ThoughtType;
 import net.meme.sirenhead.entity.SirenHeadEntity;
 import net.meme.sirenhead.procedures.SonicboomWhileProjectileFlyingTickProcedure;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;

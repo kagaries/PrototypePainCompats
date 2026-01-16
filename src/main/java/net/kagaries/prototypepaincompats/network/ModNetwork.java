@@ -7,7 +7,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 
 public class ModNetwork {
     private static final String PROTOCOL_VERSION = "1";
-    public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(ResourceLocation.fromNamespaceAndPath(Main.MODID, "prototype_pain_compat_main"), () -> "1", "1"::equals, "1"::equals);
+    public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(ResourceLocation.fromNamespaceAndPath(Main.MODID, "prototype_pain_compat_main"), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
 
     public static void register() {
         CHANNEL.registerMessage(0, SyncCustomHealthPacket.class, SyncCustomHealthPacket::write, SyncCustomHealthPacket::new, SyncCustomHealthPacket::handle);

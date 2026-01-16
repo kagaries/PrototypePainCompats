@@ -1,7 +1,6 @@
 package net.kagaries.prototypepaincompats;
 
 import com.mojang.logging.LogUtils;
-import net.kagaries.prototypepaincompats.custom.CustomPlayerHealthData;
 import net.kagaries.prototypepaincompats.custom.moodles.CustomMoodles;
 import net.kagaries.prototypepaincompats.events.CreateEvents;
 import net.kagaries.prototypepaincompats.events.CuffedEvents;

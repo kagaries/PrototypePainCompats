@@ -12,7 +12,6 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class PanicMoodle extends AbstractMoodleVisual implements TickableMoodle {
     private MoodleStatus lastMoodleStatus = MoodleStatus.NONE;

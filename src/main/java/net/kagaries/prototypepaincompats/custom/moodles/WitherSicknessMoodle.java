@@ -1,9 +1,7 @@
 package net.kagaries.prototypepaincompats.custom.moodles;
 
-import net.adinvas.prototype_pain.PlayerHealthProvider;
 import net.adinvas.prototype_pain.client.moodles.AbstractMoodleVisual;
 import net.adinvas.prototype_pain.client.moodles.MoodleStatus;
-import net.adinvas.prototype_pain.limbs.PlayerHealthData;
 import net.kagaries.prototypepaincompats.custom.CustomHealthProvider;
 import net.kagaries.prototypepaincompats.custom.CustomPlayerHealthData;
 import net.kagaries.prototypepaincompats.custom.thought.ThoughtMain;
@@ -16,7 +14,6 @@ import net.minecraft.world.entity.player.Player;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class WitherSicknessMoodle extends AbstractMoodleVisual implements TickableMoodle {
     private MoodleStatus lastMoodleStatus = MoodleStatus.NONE;

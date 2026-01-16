@@ -1,11 +1,5 @@
 package net.kagaries.prototypepaincompats.events;
 
-import com.lazrproductions.cuffed.CuffedMod;
-import com.lazrproductions.cuffed.entity.base.IAnchorableEntity;
-import com.lazrproductions.cuffed.init.ModDamageTypes;
-import com.lazrproductions.cuffed.mixin.PlayerMixin;
-import net.adinvas.prototype_pain.PlayerHealthProvider;
-import net.adinvas.prototype_pain.limbs.PlayerHealthData;
 import net.kagaries.prototypepaincompats.Main;
 import net.kagaries.prototypepaincompats.custom.CustomHealthProvider;
 import net.kagaries.prototypepaincompats.custom.CustomPlayerHealthData;
@@ -15,7 +9,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.profiling.ProfilerFiller;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
