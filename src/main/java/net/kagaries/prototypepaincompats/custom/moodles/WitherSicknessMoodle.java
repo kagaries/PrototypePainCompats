@@ -53,7 +53,7 @@ public class WitherSicknessMoodle extends AbstractMoodleVisual implements Tickab
 
     @Override
     public ResourceLocation renderIcon(GuiGraphics ms, float partialTicks, int x, int y) {
-        ResourceLocation tex = ResourceLocation.fromNamespaceAndPath("prototype_pain", "textures/gui/moodles/infection_moodle.png");
+        ResourceLocation tex = ResourceLocation.fromNamespaceAndPath("prototypepainaddon", "textures/gui/moodles/wither_sickness_moodle.png");
         ms.blit(tex, x, y, 0.0F, 0.0F, 16, 16, 16, 16);
         return tex;
     }
